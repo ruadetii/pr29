@@ -7,9 +7,11 @@ namespace Pr29_Radosteva.ViewModels
     {
         public CalendarContext calendarContext = new CalendarContext();
         public VM_Events vm_events;
+        public VM_Participants vm_participants;
         public VM_Pages()
         {
             vm_events = new VM_Events(calendarContext);
+            vm_participants = new VM_Participants(calendarContext);
         }
         public RealyCommand OnClose
         {

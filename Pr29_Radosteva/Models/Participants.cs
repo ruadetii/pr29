@@ -89,5 +89,36 @@ namespace Pr29_Radosteva.Models
                 else return "Изменить";
             }
         }
+        [Schema.NotMapped]
+        public RealyCommand OnEdit
+        {
+            get
+            {
+                return new RealyCommand(obj => {
+                    IsEnable = !IsEnable;
+
+                    if (!IsEnable)
+                        (MainWindow.init.DataContext as ViewModels.VM_Pages).calendarContext.SaveChanges();
+                });
+            }
+        }
+        [Schema.NotMapped]
+        public RealyCommand OnDelete
+        {
+            get
+            {
+                return new RealyCommand(obj =>
+                {
+                    if (MessageBox.Show("Вы уверены что хотите удалить участника?",
+                        "Предупреждение", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                    {
+                        ViewModels.VM_Pages vm_pages = MainWindow.init.DataContext as ViewModels.VM_Pages;
+                        vm_pages.vm_participants.Participants.Remove(this);
+                        vm_pages.calendarContext.Participants.Remove(this);
+                        vm_pages.calendarContext.SaveChanges();
+                    }
+                });
+            }
+        }
     }
 }

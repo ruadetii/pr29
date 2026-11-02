@@ -108,6 +108,18 @@ namespace Pr29_Radosteva.Models
             }
         }
         [Schema.NotMapped]
+        public RealyCommand OnParticipants
+        {
+            get
+            {
+                return new RealyCommand(obj => {
+                    ViewModels.VM_Pages vm_pages = MainWindow.init.DataContext as ViewModels.VM_Pages;
+                    vm_pages.vm_participants.SelectedEvent = this;
+                    MainWindow.init.frame.Navigate(new View.ParticipantsPage(vm_pages.vm_participants));
+                });
+            }
+        }
+        [Schema.NotMapped]
         public RealyCommand OnDelete
         {
             get

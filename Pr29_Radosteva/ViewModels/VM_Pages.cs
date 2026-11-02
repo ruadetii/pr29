@@ -12,6 +12,7 @@ namespace Pr29_Radosteva.ViewModels
         {
             vm_events = new VM_Events(calendarContext);
             vm_participants = new VM_Participants(calendarContext);
+            MainWindow.init.frame.Navigate(new View.Main(vm_events));
         }
         public RealyCommand OnClose
         {

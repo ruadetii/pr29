@@ -40,5 +40,15 @@ namespace Pr29_Radosteva.ViewModels
                 });
             }
         }
+
+        public RealyCommand OnBack
+        {
+            get {
+                return new RealyCommand(obj => {
+                    MainWindow.init.frame.Navigate(
+                        new View.Main((MainWindow.init.DataContext as VM_Pages).vm_events));
+                });
+            }
+        }
     }
 }
